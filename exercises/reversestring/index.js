@@ -30,10 +30,6 @@
 // };
 
 // Solution 4 - using reduce method
-const reverse = str => {
-  return str.split('').reduce((acc, curr) => {
-    return curr + acc;
-  }, '');
-};
+const reverse = str => str.split('').reduce((acc, curr) => curr + acc, '');
 
 module.exports = reverse;
