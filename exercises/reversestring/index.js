@@ -21,12 +21,19 @@
 // };
 
 // Solution 3 - using for loop
+// const reverse = str => {
+//   let reversed = '';
+//   for (let i = str.length - 1; i >= 0; i--) {
+//     reversed += str[i];
+//   }
+//   return reversed;
+// };
+
+// Solution 4 - using reduce method
 const reverse = str => {
-  let reversed = '';
-  for (let i = str.length - 1; i >= 0; i--) {
-    reversed += str[i];
-  }
-  return reversed;
+  return str.split('').reduce((acc, curr) => {
+    return curr + acc;
+  }, '');
 };
 
 module.exports = reverse;
