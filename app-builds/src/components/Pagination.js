@@ -1,11 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  BsFillArrowLeftSquareFill,
-  BsFillArrowRightSquareFill,
-} from 'react-icons/bs';
 import axios from 'axios';
-
-const apiUrl = 'https://jsonplaceholder.typicode.com/todos';
 
 const Pagination = () => {
   const [tasks, setTasks] = useState([]);
@@ -14,7 +8,9 @@ const Pagination = () => {
 
   const fetchTasks = async () => {
     try {
-      const resp = await axios.get(apiUrl);
+      const resp = await axios.get(
+        `https://jsonplaceholder.typicode.com/todos`
+      );
       const { data } = resp;
       setTasks(data);
     } catch (error) {
@@ -30,10 +26,10 @@ const Pagination = () => {
 
   const pages = [...Array(totalNumOfPages + 1).keys()].slice(1);
 
-  const indexOfLastTask = currentPage + tasksPerPage;
-  const indexofFirstTask = indexOfLastTask - tasksPerPage;
+  const indexOfLastTask = currentPage * tasksPerPage;
+  const indexOfFirstTask = indexOfLastTask - tasksPerPage;
 
-  const visibleTasks = tasks.slice(indexofFirstTask, indexOfLastTask);
+  const visibleTasks = tasks.slice(indexOfFirstTask, indexOfLastTask);
 
   const handlePrevPage = () => {
     if (currentPage !== 1) {
@@ -51,11 +47,10 @@ const Pagination = () => {
     <div className='container'>
       <h1>Pagination</h1>
       <select
-        class='form-select'
+        className='form-select'
         aria-label='Select tasks to display'
         onChange={(e) => setTasksPerPage(e.target.value)}
       >
-        <option selected>Select how many tasks to display</option>
         <option value='10'>10</option>
         <option value='20'>20</option>
         <option value='30'>30</option>
@@ -68,11 +63,13 @@ const Pagination = () => {
         })}
       </div>
       <nav aria-label='Page navigation'>
-        <ul className='pagination' onClick={handlePrevPage}>
+        <ul className='pagination'>
           <li
             className={`page-item ${currentPage === 1 && 'disabled'}`}
           >
-            <a className='page-link'>Previous</a>
+            <button className='page-link' onClick={handlePrevPage}>
+              Previous
+            </button>
           </li>
           {pages?.map((page, idx) => {
             return (
@@ -91,9 +88,10 @@ const Pagination = () => {
             className={`page-item ${
               currentPage === totalNumOfPages && 'disabled'
             }`}
-            onClick={handleNextPage}
           >
-            <a className='page-link'>Next</a>
+            <button className='page-link' onClick={handleNextPage}>
+              Next
+            </button>
           </li>
         </ul>
       </nav>
