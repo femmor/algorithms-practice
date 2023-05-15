@@ -1,19 +1,14 @@
-import { addBorder } from './addBorder';
+import { addFrame } from './addBorder';
 
-xdescribe(addBorder.name, () => {
-    it('Test 1', () => {
-        // arrange
-        const data = ['abc, ded'];
+describe(addFrame.name, () => {
+  it('Test 1', () => {
+    // arrange
+    const data = ['abc, ded'];
 
-        // act
-        const response = addBorder(data);
+    // act
+    const response = addFrame(data);
 
-        // assert
-        expect(response).toEqual([
-            "*****",
-            "*abc*",
-            "*ded*",
-            "*****"
-        ]);
-    });
+    // assert
+    expect(response).toBe(['*****', '*abc*', '*ded*', '*****']);
+  });
 });
